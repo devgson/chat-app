@@ -11,6 +11,10 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname,'/views'));
 app.use(express.static(path.join(__dirname,'../public')));
 
+app.get('/', function(req, res, next){
+  res.render('index.pug');
+});
+
 var server = http.createServer(app);
 var io = socketIO(server);
 
@@ -34,10 +38,6 @@ io.on('connection', (socket) => {
     console.log('User disconnected');
   });
 
-});
-
-app.get('/', function(req, res, next){
-  res.render('index.pug');
 });
 
 server.listen(port, function(){
