@@ -1,23 +1,19 @@
-$.trumbowyg.svgPath = '/vendors/css/icons.svg'
+var socket = io();
 
-$('#job-description, #company-description, #responsibilities, #requirements' ).trumbowyg({
-  autogrow : true,
-  btns: [
-    ['viewHTML'],
-    ['undo', 'redo'], // Only supported in Blink browsers
-    ['formatting'],
-    ['strong', 'em', 'del'],
-    ['superscript', 'subscript'],
-    ['link'],
-    ['insertImage'],
-    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-    ['unorderedList', 'orderedList'],
-    ['horizontalRule'],
-    ['removeformat'],
-    ['fullscreen']
-]
+socket.on('connect', function() {
+  console.log('Connected to Server');
+  
+  socket.on('newMessage', function(message){
+    console.log(`Message from ${message.from}`)
+  });
+
+  socket.emit('createMessage', {
+    from : 'Godson',
+    text : 'Hello'
+  })
 });
 
-$('.trumbowyg-editor, .trumbowyg-box').css({
-  'min-height' : '100px'
+socket.on('disconnect', function() {
+  console.log('Disconnected from Server');
 });
+
