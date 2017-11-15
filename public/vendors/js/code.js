@@ -12,10 +12,11 @@ socket.on('connect', function() {
 
   socket.on('newLocationMessage', function(message){
     var li = $('<li></li>');
-    var a = $('<a target="_blank"></a>');
+    var a = $('<a target="_blank"> Sends Location</a>');
     li.text(`${message.from}`);
     a.attr('href', message.url);
     li.append(a);
+    $('#messages').append(li);
   });
 
 });

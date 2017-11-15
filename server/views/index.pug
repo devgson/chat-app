@@ -1,15 +1,16 @@
 extends layout
 
-block content
-  section.container-fluid
-    p Welcome to the chat app
-    ol#messages
-    form#message-form()
-      .form-group
-        label(for="message")
-        input.form-control(type="text", name="message", placeholder="Message")
-      button.btn.btn-jobbatical(type="submit") Submit
-    button#send-location.btn.btn-jobbatical Send location
+block content 
+  .chat__sidebar
+    h3 People
+    #users df
+  .chat__main
+    ol#messages.chat__messages
+    .chat__footer
+      form#message-form
+        input(type="text", name="message", placeholder="Message")
+        button(type="submit") Submit
+      button#send-location Send location
 
 block append scripts
   script(src="/vendors/js/code.js")
