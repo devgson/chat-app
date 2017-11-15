@@ -2,6 +2,7 @@ var path = require('path');
 var http = require('http');
 var express = require('express');
 var socketIO = require('socket.io');
+var { generateMessage, generateLocationMessage } = require('./utils/generateMessage');
 
 var port = process.env.PORT || 3000;
 var app = express();
@@ -16,27 +17,23 @@ var io = socketIO(server);
 io.on('connection', (socket) => {
   console.log('New User connected');
 
-  socket.emit('newMessage',{
-    from : 'Admin',
-    text : 'Welcome to the room'
+  socket.emit('newMessage', generateMessage('Admin', 'Welcome to the room') );
+
+  socket.broadcast.emit('newMessage', generateMessage('Admin', 'User Joined'));
+
+  socket.on('createMessage', function(message, callback) {
+    io.emit('newMessage', generateMessage(message.from, message.text) );
+    callback('Sent from the server');
   });
 
-  socket.broadcast.emit('newMessage',{
-    from : 'Admin',
-    text : 'User joined'
+  socket.on('createLocationMessage', function(coords) {
+    io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude , coords.longitude) );
   });
-  
-  socket.on('createMessage', function(message){
-    /*io.emit('newMessage', {
-      from : message.from,
-      text : message.text,
-      createdAt : new Date().getTime()
-    });*/
-  })
 
   socket.on('disconnect', () => {
     console.log('User disconnected');
   });
+
 });
 
 app.get('/', function(req, res, next){
