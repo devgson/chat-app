@@ -1,0 +1,25 @@
+{
+  "name": "chat-app",
+  "version": "0.0.1",
+  "description": "Real time node application",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "moment": "^2.19.2",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gson007/chat-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gson007/chat-app/issues"
+  },
+  "homepage": "https://github.com/gson007/chat-app#readme"
+}
