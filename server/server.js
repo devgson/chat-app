@@ -15,11 +15,23 @@ var io = socketIO(server);
 
 io.on('connection', (socket) => {
   console.log('New User connected');
+
+  socket.emit('newMessage',{
+    from : 'Admin',
+    text : 'Welcome to the room'
+  });
+
+  socket.broadcast.emit('newMessage',{
+    from : 'Admin',
+    text : 'User joined'
+  });
+  
   socket.on('createMessage', function(message){
-    socket.emit('newMessage', {
+    /*io.emit('newMessage', {
       from : message.from,
-      text : message.text
-    });
+      text : message.text,
+      createdAt : new Date().getTime()
+    });*/
   })
 
   socket.on('disconnect', () => {

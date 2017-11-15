@@ -4,13 +4,13 @@ socket.on('connect', function() {
   console.log('Connected to Server');
   
   socket.on('newMessage', function(message){
-    console.log(`Message from ${message.from}`)
+    console.log(`Message : ${message.text}`)
   });
 
-  socket.emit('createMessage', {
+  /*socket.emit('createMessage', {
     from : 'Godson',
     text : 'Hello'
-  })
+  })*/
 });
 
 socket.on('disconnect', function() {
