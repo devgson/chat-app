@@ -3,6 +3,7 @@ var http = require('http');
 var express = require('express');
 var socketIO = require('socket.io');
 var { generateMessage, generateLocationMessage } = require('./utils/generateMessage');
+var { realString } = require('./utils/realString');
 
 var port = process.env.PORT || 3000;
 var app = express();
@@ -15,11 +16,25 @@ app.get('/', function(req, res, next){
   res.render('index.pug');
 });
 
+app.get('/chat', function(req, res, next){
+  res.render('chat');
+});
+
 var server = http.createServer(app);
 var io = socketIO(server);
 
+console.log(realString('  fsf'));
+console.log('  sd'.trim().length);
+
 io.on('connection', (socket) => {
   console.log('New User connected');
+
+  socket.on('join', function(param, callback){
+    if( !realString(param.name) || !realString(param.room) ){
+      callback('Name and room are required');
+    }
+    callback();
+  });
 
   socket.emit('newMessage', generateMessage('Admin', 'Welcome to the room') );
 
@@ -27,7 +42,7 @@ io.on('connection', (socket) => {
 
   socket.on('createMessage', function(message, callback) {
     io.emit('newMessage', generateMessage(message.from, message.text) );
-    callback('Sent from the server');
+    callback();
   });
 
   socket.on('createLocationMessage', function(coords) {

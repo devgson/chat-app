@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  body.chat
+    .chat__sidebar
+      h3 People
+      #users df
+    .chat__main
+      ol#messages.chat__messages
+      .chat__footer
+        form#message-form
+          input(type="text", name="message", placeholder="Message")
+          button(type="submit") Submit
+        button#send-location Send location
+
+    script#message-template(type="text/template")
+      li.message
+        .message__title
+          h4 {{ from }}
+          span {{ createdAt }}
+        .message__body
+          p {{ text }}
+    
+    script#location-message-template(type="text/template")
+      li.message
+        .message__title
+          h4 {{ from }}
+          span {{ createdAt }}
+        .message__body
+          p 
+            a( href="{{ text }}", target="_blank") My Current Location
+
+block append scripts
+  script(src="/vendors/js/code.js")

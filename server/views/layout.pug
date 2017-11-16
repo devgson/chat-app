@@ -2,16 +2,18 @@ doctype html
 html
   head
     meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
     meta(http-equiv="X-UA-Compatible", content="IE=7")
+    title Chat App
     block css
-      link(rel="stylesheet", href="/vendors/css/bootstrap.min.css")
       link(rel="stylesheet", href="/css/styles.css")
-  body.chat
-    block content
+  
+  block content
 
-    block scripts
-        script(src="/vendors/js/jquery-3.2.1.min.js")
-        script(src="/vendors/js/bootstrap.min.js")
-        script(src="/socket.io/socket.io.js")
+  block scripts
+    script(src="/vendors/js/jquery-3.2.1.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="/vendors/js/moment.min.js")
+    script(src="/vendors/js/mustache.js")
+    script(src="/vendors/js/deparam.js")
         

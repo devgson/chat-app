@@ -1,16 +1,16 @@
 extends layout
 
-block content 
-  .chat__sidebar
-    h3 People
-    #users df
-  .chat__main
-    ol#messages.chat__messages
-    .chat__footer
-      form#message-form
-        input(type="text", name="message", placeholder="Message")
-        button(type="submit") Submit
-      button#send-location Send location
-
-block append scripts
-  script(src="/vendors/js/code.js")
+block content
+  body.centered-form
+    .centered-form__form
+      form(action="/chat", method="get")
+        .form-field
+          h3 Join a chat
+        .form-field
+          label(for="name") Display Name:
+          input(type="text", name="name" autofocus)
+        .form-field
+          label(for="name") Room Name:
+          input(type="text", name="room")
+        .form-field
+          button(type="submit") Join
