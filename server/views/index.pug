@@ -9,8 +9,11 @@ block content
         .form-field
           label(for="name") Display Name:
           input(type="text", name="name" autofocus)
-        .form-field
+        .form-field#room
           label(for="name") Room Name:
-          input(type="text", name="room")
         .form-field
           button(type="submit") Join
+
+  script(src="/vendors/js/jquery-3.2.1.min.js")
+  script(src="/socket.io/socket.io.js")
+  script(src="/vendors/js/rooms.js")      

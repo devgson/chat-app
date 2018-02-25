@@ -3,13 +3,13 @@ extends layout
 block content
   body.chat
     .chat__sidebar
-      h3 People
-      #users df
+      h3 Active Users
+      #users 
     .chat__main
       ol#messages.chat__messages
       .chat__footer
         form#message-form
-          input(type="text", name="message", placeholder="Message")
+          input(type="text", name="message", placeholder="Message" autofocus autocomplete="off")
           button(type="submit") Submit
         button#send-location Send location
 
@@ -17,9 +17,9 @@ block content
       li.message
         .message__title
           h4 {{ from }}
-          span {{ createdAt }}
+          span {{ createdAt }} 
         .message__body
-          p {{ text }}
+          p {{ text }} 
     
     script#location-message-template(type="text/template")
       li.message

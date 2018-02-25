@@ -82,7 +82,8 @@ button:disabled {
 }
 
 .form-field input,
-.form-field select {
+.form-field select,
+.form-field datalist {
   border: 1px solid #e1e1e1;
   padding: 10px
 }
