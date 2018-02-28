@@ -13,8 +13,10 @@ socket.on('connect', function(){
 });
 
 socket.on('newMessage', function(message){
-  var formatedTime = moment(message.createdAt).format('h:mm a');    
-  var template = $('#message-template').html();
+  console.log(message.text);
+  var formatedTime = moment(message.createdAt).format('h:mm a');
+  var template = document.querySelector('#message-template').innerHTML;    
+  //var template = $('#message-template').html();
   var html = Mustache.render(template,{
     from : message.from,
     text : message.text,
@@ -48,13 +50,13 @@ socket.on('disconnect', function(){
 });
 
 $('#message-form').on('submit', function (event) {
-  
   event.preventDefault();
   socket.emit('createMessage', {
-    text : $('input[name=message]').val(),
+    text : document.querySelector('input[name=message]').value,
   }, function(){
     $('input[name=message]').val('');    
-  });
+  }
+);
 
 });
 

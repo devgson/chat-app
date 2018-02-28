@@ -3,7 +3,7 @@ var socket = io();
 socket.on('connect', function(){
   socket.on('activeRooms', function(rooms){
     console.log('here');
-    var template = $('#active-rooms').html();
+    var template = document.querySelector('#room').firstElementChild;
     var html = Mustache.render(
     `<input type="test" list="rooms" name="room" autocomplete="off" placeholder="Pick a room">
      <datalist id="rooms">
@@ -12,6 +12,6 @@ socket.on('connect', function(){
       {{/.}}
      </datalist>`, rooms);
     
-    $('#room').append(html);
+    template.insertAdjacentHTML('afterend',html);
   });
 });

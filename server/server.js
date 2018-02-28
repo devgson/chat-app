@@ -28,6 +28,8 @@ app.get('/chat', function(req, res, next){
 
 
 io.on('connection', (socket) => {
+  socket.emit('activeRooms',users.getActiveRooms());
+
   socket.on('join', ( params, callback ) => {
     params.room = params.room.toLowerCase();
     if( !realString(params.name) || !realString(params.room) ){
@@ -47,8 +49,6 @@ io.on('connection', (socket) => {
     socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin',`${params.name} Joined`) );
     callback();    
   });
-
-  socket.emit('activeRooms',users.getActiveRooms());
 
   socket.on('createMessage', ( message, callback ) => {
     var user = users.getUser(socket.id);
